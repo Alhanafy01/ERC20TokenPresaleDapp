@@ -1,0 +1,803 @@
+{
+	"abi":[
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "tokenAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tokenPrice",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_totalTokensForSale",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_minContribution",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_maxContribution",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tgePercentage",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_numberOfIntervals",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_intervalDuration",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "initialOwner",
+					"type": "address"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "owner",
+					"type": "address"
+				}
+			],
+			"name": "OwnableInvalidOwner",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "account",
+					"type": "address"
+				}
+			],
+			"name": "OwnableUnauthorizedAccount",
+			"type": "error"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "previousOwner",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "OwnershipTransferred",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "newPrice",
+					"type": "uint256"
+				}
+			],
+			"name": "PriceUpdated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "beneficiary",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				}
+			],
+			"name": "TokensClaimed",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "ethAmount",
+					"type": "uint256"
+				}
+			],
+			"name": "TokensPurchased",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "tgePercentage",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "numberOfIntervals",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "intervalDuration",
+					"type": "uint256"
+				}
+			],
+			"name": "VestingConfigUpdated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "bool",
+					"name": "required",
+					"type": "bool"
+				}
+			],
+			"name": "WhitelistRequirementUpdated",
+			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address[]",
+					"name": "_addresses",
+					"type": "address[]"
+				}
+			],
+			"name": "addToWhitelist",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "buyTokens",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				}
+			],
+			"name": "calculateClaimableAmount",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_amount",
+					"type": "uint256"
+				}
+			],
+			"name": "canParticipate",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "canBuy",
+					"type": "bool"
+				},
+				{
+					"internalType": "string",
+					"name": "reason",
+					"type": "string"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "claimVestedTokens",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "contributions",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getDetailedPresaleInfo",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "price",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "sold",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "remaining",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "min",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "max",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "tokenAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "bool",
+					"name": "isPaused",
+					"type": "bool"
+				},
+				{
+					"internalType": "bool",
+					"name": "isWhitelistRequired",
+					"type": "bool"
+				},
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "tgePercentage",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "numberOfIntervals",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "intervalDuration",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct SimplePresale.VestingConfig",
+					"name": "currentVesting",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				}
+			],
+			"name": "getDetailedVestingInfo",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "totalAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "claimedAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "claimableNow",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "nextClaimTime",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "remainingAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "vestingEndTime",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getPresaleStats",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "totalParticipants",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "totalRaised",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "percentageSold",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "remainingTokens",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bool",
+					"name": "isActive",
+					"type": "bool"
+				},
+				{
+					"internalType": "uint256",
+					"name": "currentPrice",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				}
+			],
+			"name": "getUserClaimStatus",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "canClaim",
+					"type": "bool"
+				},
+				{
+					"internalType": "uint256",
+					"name": "claimableAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "nextClaimIn",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "message",
+					"type": "string"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getWhitelistStatus",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "required",
+					"type": "bool"
+				},
+				{
+					"internalType": "uint256",
+					"name": "totalWhitelisted",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				}
+			],
+			"name": "isWhitelisted",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "maxContribution",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "minContribution",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "owner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "paused",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address[]",
+					"name": "_addresses",
+					"type": "address[]"
+				}
+			],
+			"name": "removeFromWhitelist",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "renounceOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bool",
+					"name": "_paused",
+					"type": "bool"
+				}
+			],
+			"name": "setPaused",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bool",
+					"name": "_required",
+					"type": "bool"
+				}
+			],
+			"name": "setWhitelistRequired",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "soldTokens",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "token",
+			"outputs": [
+				{
+					"internalType": "contract PlaceholderToken",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "tokenPrice",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "totalTokensForSale",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "transferOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_newPrice",
+					"type": "uint256"
+				}
+			],
+			"name": "updatePrice",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tgePercentage",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_numberOfIntervals",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_intervalDuration",
+					"type": "uint256"
+				}
+			],
+			"name": "updateVestingConfig",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "userVestings",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "totalAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "claimedAmount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "startTime",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "lastClaimTime",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "vestingConfig",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "tgePercentage",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "numberOfIntervals",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "intervalDuration",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "whitelist",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "whitelistRequired",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "withdrawETH",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

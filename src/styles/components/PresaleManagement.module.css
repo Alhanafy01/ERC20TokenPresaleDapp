@@ -1,0 +1,82 @@
+:root {
+  --color-primary: #007bff;
+  --color-secondary: #6c757d;
+  --color-background: #f8f9fa;
+  --font-size-base: 16px;
+  --font-family-base: 'Arial, sans-serif';
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.presaleManagement {
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family-base);
+}
+
+.infoPanel {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  box-shadow: var(--box-shadow);
+  margin-bottom: var(--spacing-medium);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-small);
+}
+
+.infoItem {
+  background-color: white;
+  padding: var(--spacing-small);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.infoItem label {
+  font-weight: bold;
+  color: var(--color-secondary);
+}
+
+.infoItem span {
+  color: var(--color-primary);
+}
+
+.actionPanel {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  box-shadow: var(--box-shadow);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+}
+
+input,
+button {
+  padding: var(--spacing-small);
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+}
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

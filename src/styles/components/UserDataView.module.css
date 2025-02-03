@@ -1,0 +1,50 @@
+.userDataView {
+  padding: 2rem;
+}
+
+.searchSection {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.userList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.userCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.userCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.userInfo {
+  margin-top: 1rem;
+}
+
+.userInfo p {
+  margin: 0.5rem 0;
+  color: #374151;
+}
+
+.userInfo ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+}
+
+.userInfo li {
+  margin: 0.25rem 0;
+  color: #6b7280;
+}
